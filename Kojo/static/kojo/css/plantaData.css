@@ -1,0 +1,57 @@
+HEAD html {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    margin: 0 auto;
+    background-image: url("/static/kojo/img/fondo.jpg");
+    background-size: 100%;
+    background-size: cover;
+}
+
+section {
+    margin-bottom: -30px;
+    background-color: rgba(76, 139, 25, 0);
+    border-radius: 30px;
+}
+
+div h1 {
+    background-image: url("/static/kojo/img/banner.jpg");
+    padding: 1rem 2rem;
+    border: 1px rgb(0, 0, 0) solid;
+    text-align: center;
+    background-size: cover;
+}
+
+nav {
+    border: 1px rgb(0, 0, 0) solid;
+    background-color: rgba(128, 91, 108, 0.315);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: xx-large;
+}
+
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+}
+
+.nav-item :hover {
+    color: black;
+    cursor: pointer;
+    margin: right 300px;
+    
+}
+
+table{
+
+    background-color: aqua;
+    border:2px solid black;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid black;
+}

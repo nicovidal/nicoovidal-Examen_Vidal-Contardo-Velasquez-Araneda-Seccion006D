@@ -1,0 +1,172 @@
+HEAD html {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    margin: 0 auto;
+    background-image: url("/static/kojo/img/fondo.jpg");
+    background-size: 100%;
+    background-size: cover;
+}
+
+section {
+    margin-bottom: -30px;
+    background-color: rgba(76, 139, 25, 0);
+    border-radius: 30px;
+}
+
+div h1 {
+    background-image: url("/static/kojo/img/banner.jpg");
+    padding: 1rem 2rem;
+    border: 1px rgb(0, 0, 0) solid;
+    text-align: center;
+    background-size: cover;
+}
+
+nav {
+    border: 1px rgb(0, 0, 0) solid;
+    background-color: rgba(128, 91, 108, 0.315);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: xx-large;
+}
+
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+}
+
+.nav-item :hover {
+    color: black;
+    cursor: pointer;
+    margin: right 300px;
+    ;
+}
+
+.row {
+
+    padding: 10px;
+}
+
+div p {
+    background-color: rgba(255, 255, 255, 0.9);
+
+    text-align: center;
+}
+
+iframe,
+object,
+embed {
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: 35%;
+    margin-bottom: 00px;
+}
+
+.galeria {
+    text-align: center;
+    margin: 20px 0px 20px 0px;
+    font-weight: 300;
+}
+
+.linea {
+    border-top: 5px solid #808080;
+    margin-bottom: 40px;
+}
+
+.contenedor-imagenes {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-radius: 3px;
+}
+
+.contenedor-imagenes .imagen {
+    height: 500px ; 
+    width: 500px ;
+    position: relative;
+    margin-top: 0px;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, .75);
+    border-radius: 30px;
+    border: 3px black solid;
+    margin-bottom:20px;
+}
+
+.imagen img {
+    object-fit: cover;
+    border-radius: 30px;
+    height: 499px ; 
+    width: 499px ;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba( 255, 255, 255, 0.781);
+    width: 499px;
+    height: 0;
+    transition: 0.8s ease;
+    overflow: hidden;
+    border-radius: 30px;
+}
+
+.overlay h2 {
+    color: rgb(255, 255, 255);
+    font-weight: 300;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.imagen:hover .overlay {
+    height: 100%;
+    cursor: pointer;
+}
+
+p{
+    font-size: 50px;
+
+}
+
+
+@media screen and (max-width:1000px) {
+    .contenedor-imagenes {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .contenedor-imagenes {
+        width: 90%;
+    }
+    .contenedor-imagenes .imagen {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width:450px) {
+    h1 {
+        font-size: 22px;
+    }
+    .contenedor-imagenes {
+        width: 98%;
+    }
+    .contenedor-imagenes .imagen {
+        width: 80%;
+    }
+}
+
+
+footer {
+    bottom: 0;
+    width: 100%;
+    position:relative;
+    border-top: 1px solid black;
+    margin-top:70px;
+}
