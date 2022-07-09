@@ -1,0 +1,3 @@
+CREATE USER C##EXAMEN identified by 1234;
+grant connect,resource to C##EXAMEN;
+alter user C##EXAMEN DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS;
