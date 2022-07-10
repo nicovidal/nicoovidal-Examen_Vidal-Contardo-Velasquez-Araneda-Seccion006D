@@ -40,6 +40,8 @@ urlpatterns = [
 
     path('plantaData/',plantaData,name="plantaData"),
 
+    path('compras/',compras,name="compras")
+
 ]
 urlpatterns=format_suffix_patterns(urlpatterns,allowed=['json','html'])
 
