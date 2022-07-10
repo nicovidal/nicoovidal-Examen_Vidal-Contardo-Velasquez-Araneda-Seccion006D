@@ -75,6 +75,9 @@ def crea(request):
 def carrito(request):
     return render(request, 'Kojo/carrito.html')
 
+def compras(request):
+    return render(request,'Kojo/compras.html')
+
 
 def productos(request):
     productos = Producto.objects.all()
@@ -153,7 +156,7 @@ def pagar(request):
             descuento=3000
             total=total-descuento
 
-        usuario=carro
+        idUsuario=User.objects.get(pk=carro[carro]["id"])
         fechaCompra = datetime.datetime.now()
         fechaEntrga = fechaCompra+datetime.timedelta(days=3)
         venta = Venta.objects.create(
@@ -161,7 +164,8 @@ def pagar(request):
             total=total,
             fch_compra=fechaCompra,
             fch_entrega=fechaEntrga,
-            idUser=usuario,
+            idUser=idUsuario,
+
             
         )
         venta.save()
