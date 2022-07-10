@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -29,8 +30,9 @@ class Producto(models.Model):
 class Venta(models.Model):
     nmr_orden = models.BigIntegerField()
     total = models.IntegerField()
-    fch_compra = models.CharField(max_length=10)
-    fch_entrega = models.CharField(max_length=10,blank=True, null=True)
+    fch_compra = models.CharField(max_length=40)
+    fch_entrega = models.CharField(max_length=40,blank=True, null=True)
+    idUser=models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.nmr_orden)

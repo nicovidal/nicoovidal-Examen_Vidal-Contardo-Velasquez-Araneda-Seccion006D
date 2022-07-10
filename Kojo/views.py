@@ -153,6 +153,7 @@ def pagar(request):
             descuento=3000
             total=total-descuento
 
+        usuario=carro
         fechaCompra = datetime.datetime.now()
         fechaEntrga = fechaCompra+datetime.timedelta(days=3)
         venta = Venta.objects.create(
@@ -160,6 +161,7 @@ def pagar(request):
             total=total,
             fch_compra=fechaCompra,
             fch_entrega=fechaEntrga,
+            idUser=usuario,
             
         )
         venta.save()
