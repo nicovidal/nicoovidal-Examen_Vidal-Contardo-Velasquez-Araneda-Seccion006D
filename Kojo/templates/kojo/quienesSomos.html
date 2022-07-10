@@ -54,10 +54,11 @@
                         <li>
                             {% if request.user.is_authenticated %}
                             <h3>Bienvenid@ {{ user.username }}</h3>
-                            <a  class="btn btn-primary btn-lg"  href="{% url 'cambiarDatos' %}">Cambiar Datos</a>
+                            <a  class="btn btn-primary btn-lg"  href="{% url 'cambiarDatos' %}">Datos</a>
                             <a role="submit" class="btn btn-primary btn-lg" href="{% url 'logout' %}">Logout</a>
                             <a  class="btn btn-primary btn-lg"  href="{% url 'carrito' %}">Carrito</a>
                             <a  class="btn btn-primary btn-lg"  href="{% url 'seguimiento' %}">Seguimiento</a>
+                            <a  class="btn btn-primary btn-lg"  href="{% url 'compras' %}">Compras</a>
                             {% else %}
                             <a role="buton" class="btn btn-primary btn-lg" href="{% url 'login' %}">Login</a> 
                             <a  class="btn btn-primary btn-lg"  href="{% url 'seguimiento' %}">Seguimiento</a>

@@ -21,7 +21,7 @@ from django.conf import settings
 from Kojo.views import btn_agregar_producto,agregar_producto, eliminar_producto, limpiar_carrito, restar_producto,planta_detalle
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path('', include('Kojo.urls')),
     path('agregar/<int:producto_id>/', agregar_producto, name="Add"),
