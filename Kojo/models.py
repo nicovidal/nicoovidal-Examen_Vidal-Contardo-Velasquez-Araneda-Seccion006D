@@ -57,3 +57,9 @@ class Planta (models.Model):
 
     def __str__(self):
         return self.nombrePlanta
+
+class Fundacion(models.Model):
+    idMiembro=models.AutoField(primary_key=True,verbose_name="ID_Miembro")
+    usuarioNombre=models.CharField(User,on_delete=models.CASCADE)
+    id_
+    
