@@ -199,9 +199,6 @@ def registroUsuario(request):
 
         )
 
-    # if(request.POST['usuario']):
-        #user.username(request.GET['user'])#
-
     user.set_password(contrasena)
     user.save()
 

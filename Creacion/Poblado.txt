@@ -1,0 +1,68 @@
+--tabla producto
+CREATE TABLE Producto (
+  idProducto NUMBER(11,0) primary_key,
+  nombreProducto NVARCHAR2(255 CHAR),
+  stock NUMBER(11,0),
+  imagen NVARCHAR2(100 CHAR),
+  PRECIO	NUMBER(11,0),
+);
+
+--tabla planta
+CREATE TABLE Planta (
+    ID 	NUMBER(19,0) primary_key,
+    NOMBREPLANTA NVARCHAR2(255 CHAR),
+    NOMBRECIENTIFICO NVARCHAR2(255 CHAR)
+    UBICACION NVARCHAR2(255 CHAR),
+    DESCRIPCION	NVARCHAR2(255 CHAR),
+    IMAGENPLANTA NVARCHAR2(100 CHAR),    
+);
+
+--tabla venta
+CREATE TABLE Venta (
+    ID	NUMBER(19,0) primary_key,
+    NMR_ORDEN	NUMBER(19,0),
+    TOTAL	NUMBER(11,0),
+    FCH_COMPRA	NVARCHAR2(10 CHAR),
+    FCH_ENTREGA	NVARCHAR2(10 CHAR),
+  
+);
+
+--tabla venta producto
+CREATE TABLE Venta_producto (
+    ID	NUMBER(19,0)primary_key,
+    CANTIDAD	NUMBER(11,0),
+    ORDEN_ID	NUMBER(19,0),
+    PRODUCTO_ID	NUMBER(11,0)ForeignKey(idProducto),
+);
+
+--tabla Comentario
+CREATE TABLE Comentario (
+    NOMBRE	NVARCHAR2(255 CHAR),
+    APELLIDOS	NVARCHAR2(255 CHAR),
+    EMAIL	NVARCHAR2(255 CHAR),
+    COMUNA	NVARCHAR2(255 CHAR),
+    COMENTARIO	NVARCHAR2(999 CHAR),
+    ID	NUMBER(19,0) primary_key,
+);
+
+
+--Tabla Comentario
+INSERT INTO KOJO_COMENTS VALUES ('PRUEBA1','Apellido','asdasd@gmail.com','maipu','hola saludos','1');
+
+--Tabla producto
+INSERT INTO KOJO_PRODUCTO VALUES(1,'Flores',99,2500,null);
+INSERT INTO KOJO_PRODUCTO VALUES(2,'Tijeras',99,1500,null);
+INSERT INTO KOJO_PRODUCTO VALUES(3,'Macetero',99,2000,null);
+INSERT INTO KOJO_PRODUCTO VALUES(4,'Spray',99,1000,null);
+INSERT INTO KOJO_PRODUCTO VALUES(5,'Fertilizante',99,1200,null);
+INSERT INTO KOJO_PRODUCTO VALUES(6,'Implementos',99,2500,null);
+
+
+--Tabla plantas
+INSERT INTO KOJO_PLANTA VALUES(1,'Menta','MentitaMentitus','Exterior','Mentha es un género de plantas herbáceas vivaces', perteneciente a la familia Lamiaceae (lamiáceas o labiadas). Se estima que cuenta con 13 a 18 especies, aunque la diferencia entre ellas es aún incierta.',null);
+INSERT INTO KOJO_PLANTA VALUES(2,'Orejas de Oso','Primula vulgaris','Exterior','La oreja de oso, es una planta herbácea que posee hojas con forma de rosetas, destacando además que estas lindas flores adoptan un color intenso y a menudo tienen un olor particular; ahora bien, si hablamos de la multiplicación de las orejas de oso.', perteneciente a la familia Lamiaceae (lamiáceas o labiadas).',null);
+INSERT INTO KOJO_PLANTA VALUES(3,'Veronica','Plantaginaceae','Exterior/Interior','La verónica es una planta que resulta tan decorativa para nosotros como atractiva para las mariposas, ya que tiene la capacidad de atraer a estos preciosos insectos polinizadores a tu jardín en los meses cálidos.',null);
+INSERT INTO KOJO_PLANTA VALUES(4,'Ruda','Ruda graveolens','interior','Ruda graveolens, comúnmente llamada ruda, es una especie de la familia Rutaceae, nativa del sur de Europa.​Se suele cultivar como planta ornamental de jardín, en especial por sus hojas azuladas y por su tolerancia a suelos secos y al calor.',null);
+INSERT INTO KOJO_PLANTA VALUES(5,'Dolar','Plectranthus coleoides','Exterior/Interior','La verónica es una planta que resulta tan decorativa para nosotros como atractiva para las mariposas, ya que tiene la capacidad de atraer a estos preciosos insectos polinizadores a tu jardín en los meses cálidos.',null);
+INSERT INTO KOJO_PLANTA VALUES(6,'Lilium','Azucena','Exterior','Las especies de Lilium, comúnmente llamadas azucenas o lirios, constituyen un género con alrededor de 110 integrantes que se incluye dentro de la familia de las liliáceas.',null);
+
