@@ -220,6 +220,7 @@ def registroUsuario(request):
         if fundaok == 'on':
             FundacionMiembro.objects.create(
               ID_Usuario=user,
+              userName=user,
             )
     except:
         print("No se unio")
@@ -229,9 +230,15 @@ def registroUsuario(request):
 
 def cambiar(request):
     if (request.method == 'POST'):
+        
         user = User.objects.get(username=request.user)
-        fundacion=FundacionMiembro.objects.get(ID_Usuario=request.user)
-        request.fundacionMiembro.idMiembro=request.POST['IDMIEMBRO']
+
+        fundacion=FundacionMiembro.objects.get(username=request.user)
+        request.fundacionMiembro.userName=request.POST['user']
+        fundacion.userName=request.POST['user']
+
+
+
         request.user.username = request.POST['usuario']
         request.user.first_name = request.POST['nombre']
         request.user.last_name = request.POST['apellido']
@@ -243,12 +250,12 @@ def cambiar(request):
         user.email = request.POST['email']
         if (request.POST['password']):
             user.set_password(request.POST['password'])
+        fundacion.save()
         user.save()
-        try:
-            fundacion=FundacionMiembro.objects.get(ID_Usuario=user)
-            request.user.fundaEs="ok"
-        except:
-            request.user.fundaEs=None
+        #try:
+            #request.user.fundaEs=True
+        #except:
+            #request.user.fundaEs=False
     return render(request, 'Kojo/cambiarDatos.html')
 
 

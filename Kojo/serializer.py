@@ -9,4 +9,4 @@ class PlantaSerializer(serializers.ModelSerializer):
 class miembrosSerializer(serializers.ModelSerializer):
     class Meta:
         model=FundacionMiembro
-        fields=['idMiembro','ID_Usuario']
+        fields=['idMiembro','ID_Usuario','userName']

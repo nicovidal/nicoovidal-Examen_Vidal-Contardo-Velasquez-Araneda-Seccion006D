@@ -120,10 +120,9 @@
                         </div>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="fundacion" {% if  user.fundaEs %} checked {% else %}' '{% endif %}>
+                        <input class="form-check-input" type="checkbox" id="fundacion" {% if  fundacion.userName %}  checked {% else %}''{% endif %}>
                         <label class="form-check-label" for="flexSwitchCheckChecked">Fundacion</label>
-                        <p>xddd{{request.user.fundaEs}}wena</p>
-                        <input id="correo" name="funda" value="{{ user.email }}"><br>
+                        <input id="user" name="user"  value="{{ fundacion.userName }}"><br>
                     </div>
                     <div>
                     <input type="submit" class="btn btn-danger" id="submitbtn" value="actualizar">

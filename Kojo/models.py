@@ -61,6 +61,7 @@ class FundacionMiembro(models.Model):
 
     idMiembro=models.AutoField(primary_key=True,verbose_name="ID_Miem")
     ID_Usuario=models.ForeignKey(User,on_delete=models.CASCADE)
+    userName=models.CharField(max_length=255)
 
     def __int__(self):
         return self.idMiembro
