@@ -70,6 +70,35 @@
                     </div>
                 </nav>
         </header>
+       
+
+            {% for elem in compras %}
+            <div class="bg-light w-75 m-5 text-center">
+            <p class="text-center"><h4>Nmr Compra: {{elem.nmr_orden}}</h4></p>
+            <p>Total Compra: {{elem.total}}</p>
+            <p>Fecha de Compra: {{elem.fch_compra}}</p>
+            {% if elem.fch_entrega %}
+            <p>Fecha de envio: {{elem.fch_entrega}}</p>
+
+            {% else %}
+            <p>Fecha de envio: No Entregado Su Producto</p>
+
+            {% endif %}
+            </div>
+            {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
  
 
 

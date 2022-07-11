@@ -81,7 +81,10 @@ def carrito(request):
 
 
 def compras(request):
-    return render(request, 'Kojo/compras.html')
+    ventas = Venta.objects.filter(idUser = request.user).all()
+    ctx={}
+    ctx['compras'] = ventas
+    return render(request, 'Kojo/compras.html',ctx)
 
 
 def productos(request):
