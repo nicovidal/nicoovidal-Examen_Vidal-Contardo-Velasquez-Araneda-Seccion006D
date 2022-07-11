@@ -9,7 +9,7 @@ from Kojo.Carrito import Carrito
 from .models import Coments, Producto, Venta, VentaProducto, Planta,FundacionMiembro
 import datetime
 import random
-from .serializer import PlantaSerializer
+from .serializer import PlantaSerializer, miembrosSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -53,6 +53,7 @@ def planta_detalle(request, id, format=None):
     elif request.method == 'DELETE':
         planta.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 def home(request):
@@ -230,6 +231,7 @@ def cambiar(request):
     if (request.method == 'POST'):
         user = User.objects.get(username=request.user)
         fundacion=FundacionMiembro.objects.get(ID_Usuario=request.user)
+        request.fundacionMiembro.idMiembro=request.POST['IDMIEMBRO']
         request.user.username = request.POST['usuario']
         request.user.first_name = request.POST['nombre']
         request.user.last_name = request.POST['apellido']
@@ -269,3 +271,42 @@ def seguimiento(request):
                 orden = Venta.objects.get(nmr_orden=num)
                 ctx['orden'] = orden.__dict__
     return render(request, 'kojo/seguimiento.html', ctx)
+
+
+@csrf_exempt
+@api_view(['GET', 'POST'])
+def miembro_lista(request, format=None):
+    """"
+    Lista de Miembros
+    """
+    if request.method == 'GET':
+        miembro = FundacionMiembro.objects.all()
+        serializer = miembrosSerializer(miembro, many=True)
+        return Response({'Miembros': serializer.data})
+    if request.method == 'POST':
+        serializer = miembrosSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def miembro_detalle(request, id, format=None):
+    try:
+        miembro= FundacionMiembro.objects.get(pk=id)
+    except miembro.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        serializer = miembrosSerializer(miembro)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = PlantaSerializer(miembro, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        miembro.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
