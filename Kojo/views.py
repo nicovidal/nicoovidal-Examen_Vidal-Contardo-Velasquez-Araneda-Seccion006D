@@ -229,6 +229,7 @@ def registroUsuario(request):
 def cambiar(request):
     if (request.method == 'POST'):
         user = User.objects.get(username=request.user)
+        fundacion=FundacionMiembro.objects.get(ID_Usuario=request.user)
         request.user.username = request.POST['usuario']
         request.user.first_name = request.POST['nombre']
         request.user.last_name = request.POST['apellido']
