@@ -84,7 +84,10 @@ def carrito(request):
 def compras(request):
     ventas = Venta.objects.filter(idUser = request.user).all()
     ctx={}
-    ctx['compras'] = ventas
+    if Venta.objects.filter(idUser=request.user).exists():
+        ctx['compras'] = ventas
+    else:
+        messages.success(request, 'No a realizado compras')
     return render(request, 'Kojo/compras.html',ctx)
 
 
