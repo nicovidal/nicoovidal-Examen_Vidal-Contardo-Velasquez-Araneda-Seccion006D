@@ -256,6 +256,15 @@ def cambiar(request):
     return render(request, 'Kojo/cambiarDatos.html')
 
 
+def compras(request):
+    ventas = Venta.objects.filter(idUser = request.user).all()
+    ctx={}
+    if Venta.objects.filter(idUser=request.user).exists():
+        ctx['compras'] = ventas
+    else:
+        messages.success(request, 'No a realizado compras')
+    return render(request, 'Kojo/compras.html',ctx)
+
 def check_user(request):
     if request.method == "GET":
         user = request.GET["username"]
