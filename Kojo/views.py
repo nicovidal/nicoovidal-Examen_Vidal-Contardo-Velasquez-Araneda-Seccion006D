@@ -197,6 +197,7 @@ def pagar(request):
     return redirect('carrito')
 
 
+
 def registroUsuario(request):
     if (request.method == 'POST'):
         usuario = request.POST['usuario']
