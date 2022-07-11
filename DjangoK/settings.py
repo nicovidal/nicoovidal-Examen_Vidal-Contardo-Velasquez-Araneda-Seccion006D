@@ -80,17 +80,9 @@ WSGI_APPLICATION = 'DjangoK.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': '127.0.0.1:1521/xe',
-        'USER':'C##EXAMEN',
-        'PASSWORD':'1234',
-        'TEST':{
-            'USER':'default_test',
-            'TBLSPACE':'default_test_tbls',
-            'TBLSPACE_TMP':'default_test_tbls_tmp',
-
-        },
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'kojo.db',
+    }
 }
 
 
