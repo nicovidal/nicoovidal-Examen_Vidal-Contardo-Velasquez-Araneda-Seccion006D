@@ -3,10 +3,10 @@ from urllib import request
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect,JsonResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from Kojo.Carrito import Carrito
-from .models import Coments, Producto, Venta, VentaProducto,Planta
+from .models import Coments, Producto, Venta, VentaProducto, Planta
 import datetime
 import random
 from .serializer import PlantaSerializer
@@ -15,49 +15,53 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
 
+
 @csrf_exempt
-@api_view(['GET','POST'])
-def planta_lista(request,format=None):
+@api_view(['GET', 'POST'])
+def planta_lista(request, format=None):
     """"
     Lista de todas las plantas
     """
-    if request.method=='GET':
-        plantas=Planta.objects.all()
-        serializer=PlantaSerializer(plantas,many=True)
-        return Response({'Plantitas':serializer.data})
-    if request.method=='POST':
-        serializer=PlantaSerializer(data=request.data)
+    if request.method == 'GET':
+        plantas = Planta.objects.all()
+        serializer = PlantaSerializer(plantas, many=True)
+        return Response({'Plantitas': serializer.data})
+    if request.method == 'POST':
+        serializer = PlantaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET','PUT','DELETE'])
-def planta_detalle(request,id,format=None):
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def planta_detalle(request, id, format=None):
     try:
-        planta=  Planta.objects.get(pk=id)
+        planta = Planta.objects.get(pk=id)
     except Planta.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.method=='GET':
-        serializer=PlantaSerializer(planta)
+    if request.method == 'GET':
+        serializer = PlantaSerializer(planta)
         return Response(serializer.data)
-    elif request.method=='PUT':
-        serializer=PlantaSerializer(planta,data=request.data)
+    elif request.method == 'PUT':
+        serializer = PlantaSerializer(planta, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-    elif request.method=='DELETE':
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
         planta.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-        
+
 
 def home(request):
     return render(request, 'Kojo/index.html')
 
+
 def plantaData(request):
-    return render(request,'Kojo/plantaData.html')
+    return render(request, 'Kojo/plantaData.html')
+
 
 def contactanos(request):
     comentario = Coments.objects.all()
@@ -75,8 +79,9 @@ def crea(request):
 def carrito(request):
     return render(request, 'Kojo/carrito.html')
 
+
 def compras(request):
-    return render(request,'Kojo/compras.html')
+    return render(request, 'Kojo/compras.html')
 
 
 def productos(request):
@@ -88,8 +93,9 @@ def agregar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(idProducto=producto_id)
     carrito.agregar(producto)
-    messages.success(request,'Agregado al Carrito')
+    messages.success(request, 'Agregado al Carrito')
     return redirect("productos")
+
 
 def btn_agregar_producto(request, producto_id):
     carrito = Carrito(request)
@@ -144,47 +150,49 @@ def envioComentario(request):
 
 def pagar(request):
     if(request.method == 'POST'):
-        carro=request.session["carrito"]
-        if (len(carro)<=0):
+        carro = request.session["carrito"]
+        if (len(carro) <= 0):
             return redirect('carrito')
         numeroOrden = random.uniform(100, 999)
-        descuento=0
-        total=0
+        descuento = 0
+        total = 0
         for produ in carro:
-            total+=int(carro[produ]["acumulado"])
-        if carro[produ]["cantidad"]>=15:
-            descuento=3000
-            total=total-descuento
+            total += int(carro[produ]["acumulado"])
+        if carro[produ]["cantidad"] >= 15:
+            descuento = 3000
+            total = total-descuento
 
-        idUsuario=User.objects.get(pk=carro[carro]["id"])
+        idUsuario = request.session["_auth_user_id"]
+        #print(request.session.keys())
         fechaCompra = datetime.datetime.now()
+        usuario=User.objects.get(pk=idUsuario)
+        #print(idUsuario)
         fechaEntrga = fechaCompra+datetime.timedelta(days=3)
         venta = Venta.objects.create(
             nmr_orden=numeroOrden,
             total=total,
             fch_compra=fechaCompra,
             fch_entrega=fechaEntrga,
-            idUser=idUsuario,
-
-            
+            idUser=usuario,
         )
         venta.save()
-           
+
         for produ in carro:
             print(carro[produ]["producto_id"])
-            productoEnCarro=Producto.objects.get(pk=carro[produ]["producto_id"])
+            productoEnCarro = Producto.objects.get(
+                pk=carro[produ]["producto_id"])
             detalle = VentaProducto.objects.create(
                 cantidad=carro[produ]["cantidad"],
                 orden=venta,
                 producto=productoEnCarro,
             )
-            detalle.save()           
-            productoEnCarro.stock-=carro[produ]["cantidad"]
+            detalle.save()
+            productoEnCarro.stock -= carro[produ]["cantidad"]
             productoEnCarro.save()
         carrito = Carrito(request)
         carrito.limpiar()
-        messages.success(request,'Pagado Correctamente')
-        request.session['nmr_orden']=int(venta.nmr_orden)
+        messages.success(request, 'Pagado Correctamente')
+        request.session['nmr_orden'] = int(venta.nmr_orden)
     return redirect('carrito')
 
 
@@ -239,12 +247,13 @@ def check_user(request):
         else:
             return HttpResponse("no existe")
 
+
 def seguimiento(request):
     ctx = {}
     if request.method == 'GET':
-       if 'num_pedido' in request.GET:
+        if 'num_pedido' in request.GET:
             num = request.GET['num_pedido']
-            if Venta.objects.filter(nmr_orden = num).exists():
-                orden = Venta.objects.get(nmr_orden = num)
+            if Venta.objects.filter(nmr_orden=num).exists():
+                orden = Venta.objects.get(nmr_orden=num)
                 ctx['orden'] = orden.__dict__
     return render(request, 'kojo/seguimiento.html', ctx)
