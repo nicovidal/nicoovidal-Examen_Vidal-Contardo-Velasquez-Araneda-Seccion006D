@@ -72,37 +72,45 @@
         </header>
        
 
+
         {% for elem in compras %}
-        <div class="bg-light w-75 m-5 text-center">
-        <p>usuario: {{elem.idUser}}</p>
-        <p class="text-center"><h4>Nmr Compra: {{elem.nmr_orden}}</h4></p>
-        <p>Total Compra: {{elem.total}}</p>
-        <p>Fecha de Compra: {{elem.fch_compra}}</p>
-        {% if elem.fch_entrega %}
-        <p>Fecha de envio: {{elem.fch_entrega}}</p>
-        {% else %}
-        <p>Fecha de envio: No Entregado Su Producto</p>
-        {% endif %}
+        <div class="container">
+            <div class="row">
+        <div class="row">
+            <div class="row g-0 bg-light position-relative">
+                <div class="col-md-2 mb-md-0 p-md-4">
+                    <h2 class="card-title"><strong> N° de Compra: {{elem.nmr_orden}} </strong></h2>                   
+                </div>
+
+                <div class="col-md-10 p-4 ps-md-0">
+                        
+                        <h1 class="card-text">
+                            <p class="card-text">
+                                Total Compra:$ {{elem.total}} <br>
+                                Fecha de Compra: {{elem.fch_compra}} <br>
+                                {% if elem.fch_entrega %}
+                                Fecha de envio: {{elem.fch_entrega}} <br>
+                                {% else %}
+                                Fecha de envio: No Entregado Su Producto
+                                {% endif %}
+                            </p>
+                        </h1>
+                </div>
+            </div>
         </div>
+
         {% endfor %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
-        {% endfor %}
-    {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+            
+            {% endfor %}
+        {% endif %}          
 
 
 
 
 
-
-
-
-
-
-
-        </div>
- 
 
 
 
