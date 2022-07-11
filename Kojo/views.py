@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from Kojo.Carrito import Carrito
-from .models import Coments, Producto, Venta, VentaProducto, Planta
+from .models import Coments, Producto, Venta, VentaProducto, Planta,FundacionMiembro
 import datetime
 import random
 from .serializer import PlantaSerializer
@@ -212,10 +212,16 @@ def registroUsuario(request):
             email=email,
 
         )
-
     user.set_password(contrasena)
     user.save()
-
+    try:
+        fundaok=request.POST['fundacion']
+        if fundaok == 'on':
+            FundacionMiembro.objects.create(
+              ID_Usuario=user,
+            )
+    except:
+        print("No se unio")
     print(request.POST)
     return redirect('crearCuenta')
 
@@ -235,6 +241,11 @@ def cambiar(request):
         if (request.POST['password']):
             user.set_password(request.POST['password'])
         user.save()
+        try:
+            fundacion=FundacionMiembro.objects.get(ID_Usuario=user)
+            request.user.fundaEs="ok"
+        except:
+            request.user.fundaEs=None
     return render(request, 'Kojo/cambiarDatos.html')
 
 

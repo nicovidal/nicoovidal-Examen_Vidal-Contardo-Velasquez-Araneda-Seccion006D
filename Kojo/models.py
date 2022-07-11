@@ -57,11 +57,11 @@ class Planta (models.Model):
     def __str__(self):
         return self.nombrePlanta
 
-class Fundacion(models.Model):
-    idMiembro=models.AutoField(primary_key=True,verbose_name="ID_Miem")
-    ID=models.ForeignKey(User,on_delete=models.CASCADE)
-    pertenece=models.BooleanField()
+class FundacionMiembro(models.Model):
 
-    def __str__(self):
+    idMiembro=models.AutoField(primary_key=True,verbose_name="ID_Miem")
+    ID_Usuario=models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def __int__(self):
         return self.idMiembro
     
