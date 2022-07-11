@@ -11,6 +11,9 @@ urlpatterns = [
     path('contactanos/', contactanos,name="contactanos"),
 
     path('planta/<int:id>',views.planta_detalle),
+
+    
+    path('miembros/<int:id>',views.miembro_detalle),
     
     path('api/', api,name="api"),
 
@@ -37,6 +40,8 @@ urlpatterns = [
     path('pagar/',pagar,name="pagar"),
 
     path('planta/',views.planta_lista),
+
+    path('miembros/',views.miembro_lista),
 
     path('plantaData/',plantaData,name="plantaData"),
 
