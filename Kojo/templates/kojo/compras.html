@@ -74,8 +74,10 @@
 
 
         {% for elem in compras %}
+        <h1 class="card-text">
         <div class="container" id="CARTAS">
             <div class="row">
+        <h1 class="card-text">
         <div class="row">
             <div class="row g-0 bg-light position-relative">
                 <div class="col-md-2 mb-md-0 p-md-4">
@@ -98,6 +100,11 @@
                 </div>
             </div>
         </div>
+        </h1>
+        </div>
+        </div>
+        </h1>
+        
 
         {% endfor %}
         {% if messages %}
@@ -105,41 +112,12 @@
                 <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
             
             {% endfor %}
-        {% endif %}          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        {% endif %}  
+        
+        <br>
+        <br>
+        <br>
+        
 
 
         <!-- fin carrusel -->
@@ -161,6 +139,7 @@
             Nicolas Vidal--Richard Araneda--Javier Contardo--Juan Velasquez<br> © 2022 Copyright:
         </div>
     </footer>
+
 
 
     <!--  scripts js -->
