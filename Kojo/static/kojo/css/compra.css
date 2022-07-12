@@ -31,6 +31,22 @@ nav {
     font-size: xx-large;
 }
 
+
+
+
+#cartas{
+    border-radius:5px;
+    border:black 1px solid;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.galeria {
+    text-align: center;
+    margin: 20px 0px 20px 0px;
+    font-weight: 300;
+}
+
 .navbar-nav.navbar-center {
     position: absolute;
     left: 50%;
@@ -66,7 +82,7 @@ div p {
 
 
 footer {
-    position: absolute;
+    position:fixed;
     bottom: 0;
     width: 100%;
     border-top: 1px solid black;
