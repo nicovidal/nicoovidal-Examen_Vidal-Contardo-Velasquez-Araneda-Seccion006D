@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
-
 
 class Coments(models.Model):
     nombre = models.CharField(max_length=255)
@@ -25,26 +23,29 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombreProducto
 
-
-
 class Venta(models.Model):
     nmr_orden = models.BigIntegerField()
     total = models.IntegerField()
     fch_compra = models.CharField(max_length=40)
     fch_entrega = models.CharField(max_length=40,blank=True, null=True)
-    idUser=models.ForeignKey(User,on_delete=models.CASCADE)
+    idUser=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
 
+
+
+    
     def __str__(self):
         return str(self.nmr_orden)
 
 
 class VentaProducto(models.Model):
     cantidad=models.IntegerField()
-    orden=models.ForeignKey(Venta,on_delete=models.CASCADE)
-    producto=models.ForeignKey(Producto,on_delete=models.CASCADE)
+    orden=models.ForeignKey(Venta,on_delete=models.SET_NULL,null=True)
+    producto=models.ForeignKey(Producto,on_delete=models.SET_NULL,null=True)
+
 
     def __str__(self):
         return str(self.cantidad)
+
 
 class Planta (models.Model):
     
@@ -57,3 +58,13 @@ class Planta (models.Model):
 
     def __str__(self):
         return self.nombrePlanta
+
+class FundacionMiembro(models.Model):
+
+    idMiembro=models.AutoField(primary_key=True,verbose_name="ID_Miem")
+    ID_Usuario=models.ForeignKey(User,on_delete=models.CASCADE)
+    userName=models.CharField(max_length=255)
+
+    def __int__(self):
+        return self.idMiembro
+    
