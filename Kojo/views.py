@@ -14,7 +14,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
-
+import requests
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
@@ -85,7 +85,7 @@ def compras(request):
     ventas = Venta.objects.filter(idUser = request.user).all()
     ctx={}
     if Venta.objects.filter(idUser=request.user).exists():
-        ctx['compras'] = ventas
+        ctx['compras'] = ventas 
     else:
         messages.success(request, 'No a realizado compras')
     return render(request, 'Kojo/compras.html',ctx)
@@ -155,6 +155,10 @@ def envioComentario(request):
     return redirect('contactanos')
 
 
+
+
+
+
 def pagar(request):
     if(request.method == 'POST'):
         carro = request.session["carrito"]
@@ -183,7 +187,6 @@ def pagar(request):
             idUser=usuario,
         )
         venta.save()
-
         for produ in carro:
             print(carro[produ]["producto_id"])
             productoEnCarro = Producto.objects.get(
@@ -239,9 +242,8 @@ def cambiar(request):
         
         user = User.objects.get(username=request.user)
 
-        fundacion=FundacionMiembro.objects.get(username=request.user)
-        request.fundacionMiembro.userName=request.POST['user']
-        fundacion.userName=request.POST['user']
+        miembro = FundacionMiembro.objects.get(ID_Usuario=request.user.id)
+  
 
 
 
@@ -256,7 +258,6 @@ def cambiar(request):
         user.email = request.POST['email']
         if (request.POST['password']):
             user.set_password(request.POST['password'])
-        fundacion.save()
         user.save()
         #try:
             #request.user.fundaEs=True

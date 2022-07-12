@@ -23,14 +23,15 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombreProducto
 
-
-
 class Venta(models.Model):
     nmr_orden = models.BigIntegerField()
     total = models.IntegerField()
     fch_compra = models.CharField(max_length=40)
     fch_entrega = models.CharField(max_length=40,blank=True, null=True)
     idUser=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+
+
+
     
     def __str__(self):
         return str(self.nmr_orden)
@@ -44,6 +45,7 @@ class VentaProducto(models.Model):
 
     def __str__(self):
         return str(self.cantidad)
+
 
 class Planta (models.Model):
     

@@ -105,7 +105,11 @@
             {% endif %}
                 <tr>
                     <th scope="row">Descuento:</th>
-                    <td colspan="2" id="descuento" name="descuento">$ -{{descuentos}}</td>
+                    <td colspan="2" id="descuento" name="descuento">$ {{descuentos}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Descuento Miembro Fundacion:</th>
+                    <td colspan="2" id="descuentoFundacion" name="descuentoFundacion" value={function()}>$ {{descuentoMiembro}}</td>
                 </tr>
                 <tr>
                  
@@ -158,4 +162,28 @@
         crossorigin="anonymous"></script>
         
 </body>
+    <script>
+        function verificar(){
+        $.ajax({
+            type:'GET',
+            url:"http://127.0.0.1:8000/miembros/",
+            success:function(data){
+                var res;
+
+                for(let miembro of data.Miembros)
+                ress+=miembro.idMiembro;
+
+
+            },error:function(e){
+                alert("no se encontro descuento")
+            }
+            
+       });
+    }
+    </script>
+    <script>
+        $(document).ready(function () {
+            
+        });
+    </script>
 </html>
