@@ -71,8 +71,6 @@
                 </nav>
         </header>
        
- 
-
         {% for elem in compras  %}
             <div class="bg-light w-75 m-5 text-center">
             <p class="text-center"><h4>Nmr Compra: {{elem.nmr_orden}}</h4></p>
@@ -90,10 +88,6 @@
                 <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
             {% endfor %}
         {% endif %}       
-
-
-
-
 
         <!-- fin carrusel -->
     </section>
