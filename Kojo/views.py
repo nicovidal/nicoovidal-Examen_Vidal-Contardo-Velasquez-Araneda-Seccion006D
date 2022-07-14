@@ -156,9 +156,6 @@ def envioComentario(request):
 
 
 
-
-
-
 def pagar(request):
     if(request.method == 'POST'):
         carro = request.session["carrito"]
@@ -241,12 +238,14 @@ def cambiar(request):
     if (request.method == 'POST'):
         
         user = User.objects.get(username=request.user)
-
-        miembro = FundacionMiembro.objects.get(ID_Usuario=request.user.id)
-  
-
-
-
+        
+        #miembro=FundacionMiembro.objects.get(ID_Usuario=request.user.id)
+            #request.user.fundaEs=True
+        #else:
+            #request.user.fundaEs=False
+        #request.miembro.ID_usuario=request.POST['user']
+        #miembro.ID_usuario=request.post['user']
+        
         request.user.username = request.POST['usuario']
         request.user.first_name = request.POST['nombre']
         request.user.last_name = request.POST['apellido']
@@ -259,10 +258,6 @@ def cambiar(request):
         if (request.POST['password']):
             user.set_password(request.POST['password'])
         user.save()
-        #try:
-            #request.user.fundaEs=True
-        #except:
-            #request.user.fundaEs=False
     return render(request, 'Kojo/cambiarDatos.html')
 
 
